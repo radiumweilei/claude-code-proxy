@@ -319,3 +319,16 @@ REQUEST_TIMEOUT="90"
 MAX_RETRIES="2"
 AZURE_API_VERSION="2025-03-01-preview"
 ```
+## 常见问题
+```shell
+# 同步上游更新
+git fetch upstream
+git checkout main
+git merge upstream/main
+
+# 启动 claude-code-proxy
+uv run claude-code-proxy
+# 或者
+uv run start_proxy.py
+
+```
