@@ -287,3 +287,35 @@ claude-code-proxy/
 ## License
 
 MIT License
+
+
+## 启动 claude-code-proxy 示例
+```shell
+# Macos 上的 Claude Code 2.1.12
+export ANTHROPIC_BASE_URL=http://localhost:8082
+export ANTHROPIC_API_KEY=any-value
+export ANTHROPIC_MODEL=gpt-5.2
+export ANTHROPIC_DEFAULT_OPUS_MODEL=gpt-5.2
+export ANTHROPIC_DEFAULT_SONNET_MODEL=gpt-5.2
+export ANTHROPIC_DEFAULT_HAIKU_MODEL=gpt-5.2
+claude
+```
+
+## 本地.env 示例
++ 这是本地能跑通的一个.env 示例，依赖于azure上部署openai模型，供参考：
+```env
+OPENAI_API_KEY="87nw....w7Hz"
+ANTHROPIC_API_KEY=any-value
+OPENAI_BASE_URL="https://....eastus2.openai.azure.com"
+BIG_MODEL="gpt-5.2"
+MIDDLE_MODEL="gpt-5.2"
+SMALL_MODEL="gpt-5.2"
+HOST="0.0.0.0"
+PORT="8082"
+LOG_LEVEL="INFO"
+MAX_TOKENS_LIMIT="10240000"
+MIN_TOKENS_LIMIT="4096"
+REQUEST_TIMEOUT="90"
+MAX_RETRIES="2"
+AZURE_API_VERSION="2025-03-01-preview"
+```

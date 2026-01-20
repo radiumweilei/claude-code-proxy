@@ -232,3 +232,17 @@ async def root():
             "test_connection": "/test-connection",
         },
     }
+
+
+# 在现有代码基础上添加以下路由
+@router.post("/api/event_logging/batch")
+async def handle_event_logging():
+    """
+    处理客户端事件日志请求，返回空响应避免404错误
+    """
+    return JSONResponse(content={"status": "success"}, status_code=200)
+
+# # 或者更简单的写法，直接返回200状态
+# @router.post("/api/event_logging/batch")
+# async def handle_event_logging():
+#     return {"status": "ok"}
