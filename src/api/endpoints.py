@@ -107,6 +107,18 @@ async def create_message(request: ClaudeMessagesRequest, http_request: Request, 
             openai_response = await openai_client.create_chat_completion(
                 openai_request, request_id
             )
+            usage = openai_response.get("usage", {})
+            input_tokens = usage.get("prompt_tokens", 0)
+            output_tokens = usage.get("completion_tokens", 0)
+            total_tokens = input_tokens + output_tokens
+            logger.info(
+                "Token usage: model=%s, stream=%s, input_tokens=%s, output_tokens=%s, total_tokens=%s",
+                request.model,
+                request.stream,
+                input_tokens,
+                output_tokens,
+                total_tokens,
+            )
             claude_response = convert_openai_to_claude_response(
                 openai_response, request
             )

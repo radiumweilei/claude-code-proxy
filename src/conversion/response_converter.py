@@ -381,5 +381,16 @@ async def convert_openai_streaming_to_claude_with_cancellation(
         if tool_data.get("started") and tool_data.get("claude_index") is not None:
             yield f"event: {Constants.EVENT_CONTENT_BLOCK_STOP}\ndata: {json.dumps({'type': Constants.EVENT_CONTENT_BLOCK_STOP, 'index': tool_data['claude_index']}, ensure_ascii=False)}\n\n"
 
+    input_tokens = usage_data.get("input_tokens", 0)
+    output_tokens = usage_data.get("output_tokens", 0)
+    total_tokens = input_tokens + output_tokens
+    logger.info(
+        "Token usage: model=%s, stream=%s, input_tokens=%s, output_tokens=%s, total_tokens=%s",
+        original_request.model,
+        True,
+        input_tokens,
+        output_tokens,
+        total_tokens,
+    )
     yield f"event: {Constants.EVENT_MESSAGE_DELTA}\ndata: {json.dumps({'type': Constants.EVENT_MESSAGE_DELTA, 'delta': {'stop_reason': final_stop_reason, 'stop_sequence': None}, 'usage': usage_data}, ensure_ascii=False)}\n\n"
     yield f"event: {Constants.EVENT_MESSAGE_STOP}\ndata: {json.dumps({'type': Constants.EVENT_MESSAGE_STOP}, ensure_ascii=False)}\n\n"
